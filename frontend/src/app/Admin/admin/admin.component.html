@@ -1,0 +1,26 @@
+<div class='container-fluid'>
+    <app-navbar></app-navbar>
+    <div class= 'row mt-2'>
+        <div class='col-3'>
+            <button class= 'btn btn-outline-info btn-block'
+                routerLink= '/admin/main/products'
+                routetLinkActive= 'active'>
+                Products
+            </button>
+
+            <button class= 'btn btn-outline-info btn-block'
+                routerLink= '/admin/main/orders'
+                routetLinkActive= 'active'>
+                Orders
+            </button>
+
+            <button class= 'btn btn-outline-info btn-block'
+               (click)= 'logout()'>
+                Logout
+            </button>
+        </div>
+        <div class= 'col-9'>  
+                <router-outlet> </router-outlet>
+        </div>
+    </div>
+</div>
