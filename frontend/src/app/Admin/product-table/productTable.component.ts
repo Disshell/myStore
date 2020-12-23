@@ -1,5 +1,3 @@
-// This component is responsible for showing a list of products to administrator to edit, delete or add a product
-
 import { Component } from '@angular/core';
 import { Product } from 'src/app/Model/product.model';
 import { ProductRepository } from 'src/app/Repository/product.repository';

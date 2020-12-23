@@ -5,21 +5,19 @@ import { RestDataSource } from 'src/app/Model/rest.datasource';
 @Injectable()
 
 export class AuthService {
-    constructor(private ds: RestDataSource) {
+    constructor(private dataSource: RestDataSource) {
     }
 
     authenticate( username: string, password: string): Observable<boolean> {
-        return this.ds.authenticate(username, password);
+        return this.dataSource.authenticate(username, password);
     }
 
-    // Getter methods to return authenticated property 
     get authenticated(): boolean {
-        return this.ds.authToken != null ;
+        return this.dataSource.authToken != null ;
     }
 
-    // clear the authentiated token
     clear() {
-        this.ds.authToken = null;
+        this.dataSource.authToken = null;
     }
 
 }

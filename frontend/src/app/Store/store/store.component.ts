@@ -47,7 +47,6 @@ export class StoreComponent implements OnInit {
         return Array(this.arrayLength).fill(0).map((x,i) => i + 1) ;
   }
 
-  // add product to the cart
   addProductToCart(prod: Product) {
     this.cart.addLine(prod);
     this.router.navigateByUrl('/cart');
