@@ -4,22 +4,22 @@ import { Cart } from './cart.model';
 @Injectable()
 
 export class Order {
-    public orderID: number ;
+    public orderId: number ;
     public name:  string ;
     public street: string ;
     public city: string ; 
     public state: string ;
-    public zip: string ;
-    public shipped: boolean = false;
+    public zipCode: string ;
+    public isShipped: boolean = false;
 
     constructor( public cart: Cart) {
 
     }
 
     clearOrder() {
-        this.orderID = null;
-        this.name = this.street = this.city = this.state = this.zip = null;
-        this.shipped = false;
+        this.orderId = null;
+        this.name = this.street = this.city = this.state = this.zipCode = null;
+        this.isShipped = false;
         this.cart.clearCart();
     }
 }

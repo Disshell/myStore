@@ -10,7 +10,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderResponse {
-    private Long Id;
+    private Long orderId;
     private String name;
     private String street;
     private String city;
@@ -19,6 +19,6 @@ public class OrderResponse {
     private Boolean isShipped;
     private Instant date;
     private String user;
-    private String products;
+    private String cart;
 }
 

@@ -14,15 +14,11 @@ import java.time.Instant;
 public interface OrderMapper {
     @Mapping(target = "date", expression = "java(java.time.Instant.now())")
     @Mapping(target = "user", source = "user")
+    @Mapping(target = "products", source = "orderRequest.cart")
     OrderDetail mapToOrder(OrderRequest orderRequest, UserCred user);
 
-    @Mapping(target = "id", source = "orderId")
-    @Mapping(target = "name", source = "name")
-    @Mapping(target = "street", source = "street")
-    @Mapping(target = "zipCode", source = "zipCode")
-    @Mapping(target = "isShipped", source = "isShipped")
-    @Mapping(target = "date", source = "date")
+
     @Mapping(target = "user", source = "user.login")
-    @Mapping(target = "products", source = "products")
+    @Mapping(target = "cart", source = "products")
     OrderResponse mapToDto(OrderDetail order);
 }

@@ -22,7 +22,7 @@ export class ProductRepository {
     }
 
     getProduct(id: number): Product {
-        return this.products.find(p => p.id == id);
+        return this.products.find(p => p.productId == id);
     }
 
     getCategories(): string[] {
@@ -31,7 +31,7 @@ export class ProductRepository {
 
 
     saveProduct(product: Product) {
-        if(product.id == null || product.id == 0)
+        if(product.productId == null || product.productId == 0)
         {
             this.dataSource.saveProduct(product).subscribe(p => this.products.push(p));
         }
@@ -39,7 +39,7 @@ export class ProductRepository {
         {
             this.dataSource.updateProduct(product).subscribe (p =>
                 {
-                    this.products.splice(this.products.findIndex(p => p.id == product.id), 1, product);
+                    this.products.splice(this.products.findIndex(p => p.productId == product.productId), 1, product);
                 });
         }
     }
@@ -47,7 +47,7 @@ export class ProductRepository {
     deleteProduct(id: number) {
         this.dataSource.deleteProduct(id).subscribe(p =>
             {
-                this.products.splice(this.products.findIndex(p => p.id == id), 1);
+                this.products.splice(this.products.findIndex(p => p.productId == id), 1);
             });
     }
 }

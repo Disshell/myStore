@@ -19,5 +19,5 @@ public class OrderRequest {
     private String zipCode;
     private Boolean isShipped;
     private Instant date;
-    private String products;
+    private String cart;
 }

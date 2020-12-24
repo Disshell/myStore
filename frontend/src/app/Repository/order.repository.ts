@@ -21,7 +21,8 @@ export class OrderRepository {
     }
 
     getOrders(): Order[] {
-        if(! this.loaded)
+        if(!this.loaded)
+            this.loadOrders();
          return this.orders ;
     }
     
@@ -32,14 +33,14 @@ export class OrderRepository {
     updateOrder(order: Order) {
         this.dataSource.updateOrder(order).subscribe(order =>
             {
-                this.orders.splice(this.orders.findIndex(o => o.orderID == order.orderID), 1, order);
+                this.orders.splice(this.orders.findIndex(o => o.orderId == order.orderId), 1, order);
             });
     }
 
     deleteOrder(id: number) {
         this.dataSource.deleteOrder(id).subscribe(o =>
             {
-                this.orders.splice(this.orders.findIndex(o => o.orderID == id), 1);
+                this.orders.splice(this.orders.findIndex(o => o.orderId == id), 1);
             });
     }
 

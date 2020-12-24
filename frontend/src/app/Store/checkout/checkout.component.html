@@ -50,7 +50,7 @@
                
         <div class='form-group'>
             <label> Zip </label>
-            <input class='form-control' #zip='ngModel' name='zip' [(ngModel)]='order.zip' required>
+            <input class='form-control' #zip='ngModel' name='zip' [(ngModel)]='order.zipCode' required>
         </div>
         <span *ngIf="orderSubmitted && zip.invalid" class='text-danger'>
             Please enter your zip

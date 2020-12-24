@@ -16,11 +16,11 @@ export class OrderTableComponent {
   }
 
   getOrders() : Order[] {
-    return this.repository.getOrders().filter(o => !o.shipped || this.shipped);
+    return this.repository.getOrders().filter(o => !o.isShipped || this.shipped);
   }
 
   markShipped(order: Order) {
-    order.shipped = true;
+    order.isShipped = true;
     this.repository.updateOrder(order);
   }
 
