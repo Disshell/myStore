@@ -18,6 +18,13 @@ export class AuthService {
 
     clear() {
         this.dataSource.authToken = null;
+        this.dataSource.role = null;
+    }
+
+    isAdmin():boolean{
+        if(this.dataSource.role == "[ROLE_ADMIN]")
+            return true;
+        return false;
     }
 
 }

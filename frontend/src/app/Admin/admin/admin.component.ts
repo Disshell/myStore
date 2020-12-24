@@ -8,12 +8,7 @@ import { AuthService } from 'src/app/Shared/services/auth.service';
 
 export class AdminComponent {
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private auth: AuthService) {
 
    }
-
-  logout() {
-    this.auth.clear();
-    this.router.navigateByUrl('/');
-  }
 }

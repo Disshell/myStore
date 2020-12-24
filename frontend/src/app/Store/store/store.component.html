@@ -13,11 +13,6 @@
                 (click)='changeCategory(item)'>
                 {{ item }}
             </button>
-            
-            <!-- Store Admin button -->
-            <button class='btn btn-danger btn-block m-t-3' routerLink='/admin'>
-                Store Admin
-            </button>
 
         </div>
         <div class='col-9 bg-success p-2'>
@@ -36,13 +31,12 @@
                     </button>
                 </div>
             </div>
-            <!-- Add pagination -->
             <div class='form-inline float-left mr-1'>
                 <select class='form-control' [value] = 'productsPerPage'
                 (change)='changePageSize($event.target.value)'>
                     <option value='4'> 4 per Page </option>
                     <option value='6'> 6 per Page </option>
-                    <option value='8'> 6 per Page </option>
+                    <option value='8'> 8 per Page </option>
                 </select>
             </div>
             <div class='btn-group float-right'>

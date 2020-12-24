@@ -6,20 +6,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { map } from 'rxjs/operators'
 
 const PROTOCOL= 'http';
-const PORT= 4210 ;
+const PORT= 8080 ;
 
 @Injectable()
 
 export class RestDataSource {
     baseUrl: string;
     authToken: string;
+    role: string;
 
     constructor(private http: HttpClient) {
         this.baseUrl= `${PROTOCOL}://${location.hostname}:${PORT}/`
     }
 
     getProducts(): Observable<Product[]> {
-        return this.http.get<Product[]>(this.baseUrl + 'products');
+        console.log(this.authToken);
+        return this.http.get<Product[]>(this.baseUrl + 'api/product', this.getOptions());
     }
 
     saveOrder(order: Order) : Observable<Order> {
@@ -27,11 +29,17 @@ export class RestDataSource {
     }
 
     authenticate(user: string, pass: string): Observable<boolean> {
-        return this.http.post<any>(this.baseUrl + 'login', 
-        { name: user, password: pass}).pipe(map(response =>
+        return this.http.post<any>(this.baseUrl + 'api/auth/login', 
+        { login: user, password: pass}).pipe(map(response =>
             {
-                this.authToken = response.success? response.token: null;
-                return response.success;
+                console.log(response)
+                this.authToken = response.login != null ? this.authToken = response. authenticationToken: null;
+                this.role = response.role
+                console.log(response.login)
+                if(response.login !=null)
+                    return true;
+                else
+                    false;
             }));
     }
 
@@ -68,7 +76,7 @@ export class RestDataSource {
         return { 
             headers: new HttpHeaders
             ({
-                'Authorization': `Bearer<${this.authToken}`
+                'Authorization': `Bearer ${this.authToken}`
              })
         }
     }

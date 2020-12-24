@@ -11,7 +11,6 @@ import { AdminGuard } from '../Shared/guards/admin.guard';
 import { SharedModule } from '../Shared/shared.module';
 
 let routing = RouterModule.forChild([
-        { path: 'auth', component: AuthComponent } ,
         { path: 'main', component: AdminComponent, canActivate: [AdminGuard],
             children:[
                 { path: 'products/:mode/:id',   component:ProductEditorComponent},
