@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.disshell.Store.dto.OrderRequest;
 import ru.disshell.Store.dto.OrderResponse;
@@ -28,16 +29,18 @@ public class OrderController {
           orderService.save(orderRequest);
           return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<List<OrderResponse>> getAllOrder() {
         return status(HttpStatus.OK).body(orderService.getAllOrders());
     }
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<OrderResponse> updateOrder(@PathVariable Long id, @RequestBody OrderRequest orderRequest){
         return ResponseEntity.status(HttpStatus.OK).body( orderService.edit(id, orderRequest));
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Long> deleteOrder(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body( orderService.delete(id));
     }
