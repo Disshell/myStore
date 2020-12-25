@@ -14,6 +14,7 @@ import ru.disshell.Store.dto.ProductDto;
 import ru.disshell.Store.mapper.OrderMapper;
 import ru.disshell.Store.model.OrderDetail;
 import ru.disshell.Store.model.Product;
+import ru.disshell.Store.model.UserCred;
 import ru.disshell.Store.repository.OrderRepository;
 
 import java.util.List;
@@ -63,6 +64,19 @@ public class OrderService {
     public Long delete(Long id){
         orderRepository.deleteById(id);
         return  id;
+    }
+
+    @Transactional(readOnly = true)
+public List<OrderResponse> getOrdersByUsername(String username){
+        UserCred curUser = authService.getCurrentUser();
+        if (curUser.getLogin().equals(username)) {
+            return orderRepository.findAllByUser(curUser)
+                    .stream()
+                    .map(orderMapper::mapToDto)
+                    .collect(toList());
+        }
+        else
+            return null;
     }
 
 

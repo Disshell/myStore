@@ -1,3 +1,4 @@
+import { OrderTableComponent } from './Admin/order-table/orderTable.component';
 import { StoreModule } from './store/store.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,7 @@ const routes: Routes = [
 { path: 'cart', component: CartDetailsComponent, canActivate: [FirstGuard, AuthGuard]},
 { path: 'checkout' , component: CheckoutComponent, canActivate: [FirstGuard, AuthGuard]},
 { path: 'admin', loadChildren: () => AdminModule, canActivate: [FirstGuard, AuthGuard, AdminGuard]},
+{ path: 'order/:login', component: OrderTableComponent},
 { path: '**' , redirectTo: '/store'}
 ];
 

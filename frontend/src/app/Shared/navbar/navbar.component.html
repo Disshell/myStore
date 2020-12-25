@@ -10,7 +10,7 @@
           <a class="nav-link" routerLink="/store" routerLinkActive="active">Store</a>
         </li>
         <li *ngIf="this.auth.authenticated" class="nav-item">
-          <a  class="nav-link" routerLink="/asdf" routerLinkActive="active">My orders</a>
+          <a  class="nav-link" routerLink="/order/sol" routerLinkActive="active">My orders</a>
         </li>
         <li *ngIf="this.auth.isAdmin()" class="nav-item">
           <a  class="nav-link" routerLink="/admin/main" routerLinkActive="active">Admin Panel</a>

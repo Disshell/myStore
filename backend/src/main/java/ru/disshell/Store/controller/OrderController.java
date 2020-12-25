@@ -34,6 +34,10 @@ public class OrderController {
     public ResponseEntity<List<OrderResponse>> getAllOrder() {
         return status(HttpStatus.OK).body(orderService.getAllOrders());
     }
+    @GetMapping("/{login}")
+    public ResponseEntity<List<OrderResponse>> getOrdersByUsername(@PathVariable String login) {
+        return status(HttpStatus.OK).body(orderService.getOrdersByUsername(login));
+    }
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<OrderResponse> updateOrder(@PathVariable Long id, @RequestBody OrderRequest orderRequest){
