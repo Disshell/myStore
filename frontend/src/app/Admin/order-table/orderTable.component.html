@@ -1,44 +1,35 @@
-<div class= "form-check">
-    <label class= "form-check-label"> 
-        <input class="form-check-input" type="checkbox" [(ngModel)]= "shipped" />
+<div class="form-check">
+  <label class="form-check-label">
+    <input class="form-check-input" type="checkbox" [(ngModel)]="shipped" />
     Display Shipped Orders
-    </label>
+  </label>
+</div>
+<tr *ngIf='getOrders().length == 0'>
+  <td colspan="5">
+    There are no orders
+  </td>
+</tr>
+
+
+<ng-template ngFor let-o [ngForOf]='getOrders()'>
+  <div class='card m-3 p-1'>
+    <div class="card-header">{{ o.zipCode }} {{ o.state }} {{ o.city }} {{ o.street}}
+      <button class='btn btn-sm btn-success float-right' (click)='markShipped(o.orderId)'>
+        Ship
+      </button>
+      <button class='btn btn-sm btn-danger float-right' (click)='deleteOrder(o.orderId)'>
+        Delete
+      </button>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ o.name }}</h5>
+      <div class='card-text p-1'>
+        <div *ngFor='let line of o.cart.lines'>
+           Product: {{line.prod.name }} x{{ line.quantity }} 
+        </div>
+      </div>
+    </div>
   </div>
 
-  <table class= 'table'>
-      <thead>
-          <tr>
-              <th> Customer Name </th>
-              <th> ZIP code </th>
-              <th> Cart </th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngIf='getOrders().length == 0'>
-              <td colspan="5">
-                There are no orders
-              </td>
-          </tr>
 
-          <ng-template ngFor let-o [ngForOf]='getOrders()'>
-              <tr>
-                  <td> {{ o.name }} </td>
-                  <td> {{ o.zipCode }} </td>
-                  <th> Product </th>
-                  <th>Quantity </th> 
-                  <td>
-                      <button class='btn btn-warning' (click) = 'markShipped(o)'>
-                        Ship
-                      </button>
-                      <button class='btn btn-danger' (click) = 'deleteOrder(o.orderId)'>
-                        Delete
-                      </button>
-                  </td>
-              </tr>
-              <tr *ngFor = 'let line of o.cart.lines'>
-                  <td> {{line.prod.name }} </td>
-                <td>{{ line.quantity }} </td> 
-              </tr>
-          </ng-template>
-      </tbody>
-  </table>
+</ng-template>
