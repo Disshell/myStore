@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.disshell.Store.dto.ProductDto;
+import ru.disshell.Store.model.Product;
 import ru.disshell.Store.service.ProductService;
 
 import java.util.List;
@@ -30,5 +31,19 @@ public class ProductController {
                .status(HttpStatus.OK)
                .body(productService.getAll());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto){
+        return ResponseEntity.status(HttpStatus.OK).body( productService.edit(id, productDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> deleteProduct(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(productService.delete(id));
+    }
+
+
+
+
 
 }

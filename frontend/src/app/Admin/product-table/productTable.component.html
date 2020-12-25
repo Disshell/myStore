@@ -17,13 +17,13 @@
             <td> {{ item.price | currency: 'USD': 'symbol': '2.2-2' }} </td> 
             <td>
                 <button class= 'btn btn-sm btn-warning'
-                    [routerLink]="['/admin/main/products/edit', item.id ]" >
+                    [routerLink]="['/admin/main/products/edit', item.productId ]" >
                     Edit
                 </button>
             </td>
             <td>
                 <button class= 'btn btn-sm btn-danger'
-                    (click)='deleteProduct(item.id)' >
+                    (click)='deleteProduct(item.productId)' >
                     Delete
                 </button>
             </td>

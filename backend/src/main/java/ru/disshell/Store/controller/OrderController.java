@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.disshell.Store.dto.OrderRequest;
 import ru.disshell.Store.dto.OrderResponse;
+import ru.disshell.Store.dto.ProductDto;
 import ru.disshell.Store.service.OrderService;
 
 import java.util.List;
@@ -29,8 +30,16 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderResponse>> getAllPosts() {
+    public ResponseEntity<List<OrderResponse>> getAllOrder() {
         return status(HttpStatus.OK).body(orderService.getAllOrders());
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<OrderResponse> updateOrder(@PathVariable Long id, @RequestBody OrderRequest orderRequest){
+        return ResponseEntity.status(HttpStatus.OK).body( orderService.edit(id, orderRequest));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> deleteOrder(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body( orderService.delete(id));
     }
 
 }

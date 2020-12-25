@@ -43,23 +43,22 @@ export class RestDataSource {
     }
 
     saveProduct(product: Product): Observable<Product> {
-        return this.http.post<Product>(this.baseUrl + 'products', product, this.getOptions());
+        return this.http.post<Product>(this.baseUrl + 'api/product', product, this.getOptions());
     }
 
     updateProduct(product: Product): Observable<Product> {
         return this.http.put<Product>
-            (`${this.baseUrl}products/${product.productId}`, product, this.getOptions());
+            (`${this.baseUrl}api/product/${product.productId}`, product, this.getOptions());
     }
 
     deleteProduct(id: number): Observable<Product> {
         return this.http.delete<Product> 
-        (`${this.baseUrl}products/${id}`, this.getOptions());  
+        (`${this.baseUrl}api/product/${id}`, this.getOptions());  
     }
 
     getOrders(): Observable<Order[]> {
         return this.http.get<OrderDto[]>(this.baseUrl + 'api/order', this.getOptions()).pipe(map(
             response => {
-                console.log(response)
                 console.log(this.DtoToOrderArr(response))
                 return this.DtoToOrderArr(response);
             }
@@ -67,14 +66,20 @@ export class RestDataSource {
     }
 
     updateOrder(order: Order): Observable<Order> {
-        return this.http.put<Order>
-            (`${this.baseUrl}orders/${order.orderId}`, order, this.getOptions());
+        return this.http.put<OrderDto>
+            (`${this.baseUrl}api/order/${order.orderId}`, this.orderToDto(order), this.getOptions()).pipe(map(
+                response => {
+                    console.log(response)
+                    console.log(this.DtoToOrder(response))
+                    return this.DtoToOrder(response);
+                }
+            ));;
     }
 
     deleteOrder(id: number): Observable<Order>  
     {
         return this.http.delete<Order> 
-        (`${this.baseUrl}orders/${id}`, this.getOptions());  
+        (`${this.baseUrl}api/order/${id}`, this.getOptions());  
     }
 
    private getOptions() {
@@ -112,6 +117,20 @@ export class RestDataSource {
             result[i].street = orderDto[i].street;
             result[i].zipCode = orderDto[i].zipCode;
         }
+        return result;
+    }
+
+    private DtoToOrder(orderDto: OrderDto): Order{
+        let cart:Cart = JSON.parse(orderDto.cart);
+        let result: Order = new Order(cart)
+        result = new Order(cart)        
+        result.city = orderDto.city;
+        result.isShipped = orderDto.isShipped;
+        result.name = orderDto.name;
+        result.orderId = orderDto.orderId;
+        result.state = orderDto.state;
+        result.street = orderDto.street;
+        result.zipCode = orderDto.zipCode;
         return result;
     }
 }

@@ -10,6 +10,7 @@ import ru.disshell.Store.model.Product;
 import ru.disshell.Store.repository.ProductRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -35,6 +36,25 @@ public class ProductService {
                 .stream()
                 .map(productMapper::mapProductToDto)
                 .collect(toList());
+    }
+
+    @Transactional
+    public ProductDto edit(Long productId, ProductDto productDto) {
+        Optional<Product> edit = productRepository.findById(productId);
+        Product product = edit.get();
+        product.setCategory(productDto.getCategory());
+        product.setDescription(productDto.getDescription());
+        product.setImg(productDto.getImg());
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        productRepository.save(product);
+        return productMapper.mapProductToDto(product);
+    }
+
+    @Transactional
+    public long delete(Long productId){
+        productRepository.deleteById(productId);
+        return productId;
     }
 }
 
