@@ -8,9 +8,9 @@ import ru.disshell.Store.dto.AuthenticationResponse;
 import ru.disshell.Store.dto.LoginRequest;
 import ru.disshell.Store.dto.RefreshTokenRequest;
 import ru.disshell.Store.dto.RegisterRequest;
-import ru.disshell.Store.model.RefreshToken;
 import ru.disshell.Store.service.AuthService;
 import ru.disshell.Store.service.RefreshTokenService;
+import ru.disshell.Store.service.RefreshTokenServiceImpl;
 
 @RestController
 @RequestMapping("/api/auth")

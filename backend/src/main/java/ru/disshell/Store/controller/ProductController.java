@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.disshell.Store.dto.ProductDto;
-import ru.disshell.Store.model.Product;
 import ru.disshell.Store.service.ProductService;
+import ru.disshell.Store.service.ProductServiceImpl;
 
 import java.util.List;
 
