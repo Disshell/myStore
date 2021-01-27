@@ -1,52 +1,49 @@
-
 <div class='container-fluid'>
-    <app-navbar></app-navbar>
-    <div class='row '>
-        <div class='col-3 p-2'>
-            Categories:
-            <button class='btn btn-block btn-outline-primary' (click)='changeCategory()'>
-                All Products
-            </button>
-            <button *ngFor='let item of Categories' 
-                class='btn btn-block btn-outline-primary' 
-                [class.active]='item == selectedCategory'
-                (click)='changeCategory(item)'>
-                {{ item }}
-            </button>
-            <app-cart-summary></app-cart-summary>
-        </div>
-        <div class='col-9 p-2'>
-            Products
-            <div *ngFor='let item of Products' class='card m-1 p-1 border-primary' >
-                 <div class="card-body text-primary">
-                    <h4>
-                        {{ item.name }}
-                        <span class='badge badge-pill badge-primary float-right'>
-                            {{ item.price | currency:"USD": "symbol":"2.2-2"}}
-                        </span>
-                    </h4>
-                    <div class='card-text p-1'>
-                        {{ item.description }}
-                        <button class='btn btn-sm btn-outline-success float-right' (click)='addProductToCart(item)'>
-                            Add to Cart
-                        </button>
-                    </div>
-                 </div>
-            </div>
-            <div class='form-inline float-left mr-1'>
-                <select class='form-control' [value] = 'productsPerPage'
-                (change)='changePageSize($event.target.value)'>
-                    <option value='4'> 4 per Page </option>
-                    <option value='6'> 6 per Page </option>
-                    <option value='8'> 8 per Page </option>
-                </select>
-            </div>
-            <div class='btn-group float-right'>
-                <button *ngFor='let page of getPageNumbers()' (click)='changePage(page)'
-                class='btn btn-primary' [class.active]='page == selectedPage'>
-                    {{ page }}
-                </button>
-            </div>
-        </div>
+  <app-navbar></app-navbar>
+  <div class='row '>
+    <div class='col-3 p-2'>
+      Categories:
+      <button class='btn btn-block btn-outline-primary' (click)='changeCategory()'>
+        All Products
+      </button>
+      <button *ngFor='let item of Categories' class='btn btn-block btn-outline-primary'
+        [class.active]='item == selectedCategory' (click)='changeCategory(item)'>
+        {{ item }}
+      </button>
+      <app-cart-summary></app-cart-summary>
     </div>
+    <div class='col-9 p-2'>
+      Products
+      <div *ngFor='let item of Products' class='card m-1 p-1 border-primary'>
+        <img class="card-img-top" [src]="item.img" alt="Card image cap">
+        <div class="card-body text-primary">
+          <h4>
+            {{ item.name }}
+            <span class='badge badge-pill badge-primary float-right'>
+              {{ item.price | currency:"USD": "symbol":"2.2-2"}}
+            </span>
+          </h4>
+          <div class='card-text p-1'>
+            {{ item.description }}
+            <button class='btn btn-sm btn-outline-success float-right' (click)='addProductToCart(item)'>
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class='form-inline float-left mr-1'>
+        <select class='form-control' [value]='productsPerPage' (change)='changePageSize($event.target.value)'>
+          <option value='4'> 4 per Page </option>
+          <option value='6'> 6 per Page </option>
+          <option value='8'> 8 per Page </option>
+        </select>
+      </div>
+      <div class='btn-group float-right'>
+        <button *ngFor='let page of getPageNumbers()' (click)='changePage(page)' class='btn btn-primary'
+          [class.active]='page == selectedPage'>
+          {{ page }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

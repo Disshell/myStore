@@ -6,7 +6,8 @@ import { ProductRepository } from 'src/app/Repository/product.repository';
 
 @Component({
   selector: 'app-store',
-  templateUrl: './store.component.html'
+  templateUrl: './store.component.html',
+  styleUrls: ['./store.component.css']
 })
 export class StoreComponent implements OnInit {
 
